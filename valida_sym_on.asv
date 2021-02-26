@@ -12,61 +12,55 @@ target_save = 'figures\modelo_vs_simulacao';
 
 % LER DADOS PSIM
 name = 'trian_pico_100_zoh(tudo_5k).txt';
-[freq_zoh, amp_zoh, phase_zoh] = get_txt_bode(name);
-name = 'trian_pico_100_zoh_quanti(tudo_5k).txt';
-[freq_zoh_quanti, amp_zoh_quanti, phase_zoh_quanti] = get_txt_bode(name);
-
-freq = freq_zoh;
+[freq, amp, phase] = get_txt_bode(name);
 freq_min = freq(1);
 freq_max = freq(end);
-vector_freq = freq;
+
+name = 'trian_pico_100_zoh_quanti(tudo_5k).txt';
+[freq_quanti, amp_quanti, phase_quanti] = get_txt_bode(name);
 
 % CONFIGURANDO BODE
+
 opts4 = bodeoptions;
 opts4.FreqUnits = 'Hz';                  % set to 'Hz' unit
+vector_freq = freq;
 opts4.grid = 'on';
 
-% GERANDO MODELO SEM PADE
+% GERANDO MODELO
 s = tf('s');
 fs=5e3;
 Ts=1/fs;
 D=.5;
 D_modelo = sym_on(D, fs);
-[mag, phase, wout] = bode(D_modelo,vector_freq, opts4);
-mag = mag(:,:)';
-mag = 20*log(mag);
-phase = phase(:,:)';
-
-% GERANDO MODELO COM PADE
-atraso = pade_apro(fs);
+% atraso = pade_apro(fs);
+atraso  = 1;
 [mag2, phase2, wout2] = bode(D_modelo*atraso,vector_freq, opts4);
 mag2 = mag2(:,:)';
-mag2 = 20*log(mag2);
 phase2 = phase2(:,:)';
+
+
 
 figure
 subplot(2,1,1);
-semilogx(wout,mag)
+semilogx(wout2,20*log(mag2))
 ylabel('Magnitude (dB)')
 xlabel('Frequency')
 xlim([freq_min freq_max])
 grid
 hold on
-semilogx(wout2,mag2)
-semilogx(freq,amp_zoh)
-semilogx(freq,amp_zoh_quanti)
+semilogx(freq,amp)
+semilogx(freq_quanti,amp_quanti)
 hold off
 subplot(2,1,2); 
-semilogx(wout,phase)
+semilogx(wout2,phase2)
 ylabel('Phase (deg)')
 xlabel('Frequency')
 xlim([freq_min freq_max])
 grid
 hold on
-semilogx(wout2,phase2)
-semilogx(freq,phase_zoh)
-semilogx(freq,phase_zoh_quanti)
+semilogx(freq,phase)
+semilogx(freq_quanti,phase_quanti)
 hold off
-legend({'Modelo symm on','Modelo symm on + atraso padé','Simulação (ZOH)','Simulação (ZOH+quantizador)'},'Location','southwest')
+legend({'Modelo matemático','Simulação (ZOH)','Simulação (ZOH+quantizador)'},'Location','southwest')
 sgtitle('Symmetric-on-time - Modelo vs Simulação no PSIM')
 save_figure('Sym_on', target_save)

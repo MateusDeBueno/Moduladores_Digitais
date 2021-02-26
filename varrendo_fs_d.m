@@ -6,7 +6,8 @@ close ALL
 showing_figures = false; %setar esta variavel
 if showing_figures == true
     set(0,'DefaultFigureVisible','on')
-else    set(0,'DefaultFigureVisible','off')
+else
+    set(0,'DefaultFigureVisible','off')
 end
 
 % PEGAR SUBDIRETORIOS
@@ -27,7 +28,6 @@ freq_step = 1;
 freq_max = 50e3;
 freq_min = 50;
 vector_freq = freq_min*2*pi:freq_step:freq_max*2*pi;
-opts.Title.FontSize = 14;
 opts.XLabel.FontSize = 11;
 opts.YLabel.FontSize = 11;
 opts.TickLabel.FontSize = 11;

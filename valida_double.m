@@ -11,15 +11,15 @@ addpath(genpath(folder))
 target_save = 'figures\modelo_vs_simulacao';
 
 % LER DADOS PSIM
-name = 'trian_vale_100_zoh(tudo_5k).txt';
+name = 'double_100_zoh(tudo_10k).txt';
 [freq_zoh, amp_zoh, phase_zoh] = get_txt_bode(name);
-name = 'trian_vale_100_zoh_quanti(tudo_5k).txt';
+name = 'double_100_zoh_quanti(tudo_10k).txt';
 [freq_zoh_quanti, amp_zoh_quanti, phase_zoh_quanti] = get_txt_bode(name);
 
-freq = freq_zoh;
+freq = freq_zoh; %vetor de frequencia para todos os plots
 freq_min = freq(1);
 freq_max = freq(end);
-vector_freq = freq;
+vector_freq = freq_zoh;
 
 % CONFIGURANDO BODE
 opts4 = bodeoptions;
@@ -31,7 +31,7 @@ s = tf('s');
 fs=5e3;
 Ts=1/fs;
 D=.5;
-D_modelo = sym_off(D, fs);
+D_modelo = double_up(D, fs);
 [mag, phase, wout] = bode(D_modelo,vector_freq, opts4);
 mag = mag(:,:)';
 mag = 20*log(mag);
@@ -43,7 +43,7 @@ atraso = pade_apro(fs);
 mag2 = mag2(:,:)';
 mag2 = 20*log(mag2);
 phase2 = phase2(:,:)';
-
+phase2 = phase2 - 360;
 
 figure
 subplot(2,1,1);
@@ -68,7 +68,7 @@ semilogx(wout2,phase2)
 semilogx(freq,phase_zoh)
 semilogx(freq,phase_zoh_quanti)
 hold off
-legend({'Modelo symm off','Modelo symm off + atraso padé','Simulação (ZOH)','Simulação (ZOH+quantizador)'},'Location','southwest')
-sgtitle('Symmetric-off-time - Modelo vs Simulação no PSIM')
-save_figure('Sym_off', target_save)
+legend({'Modelo double update','Modelo double update + atraso padé','Simulação (ZOH)','Simulação (ZOH+quantizador)'},'Location','southwest')
+sgtitle('Double update - Modelo vs Simulação no PSIM')
+save_figure('Double update', target_save)
 
