@@ -2,6 +2,13 @@ clc
 clear ALL
 close ALL
 
+% CONFIGURAR PARA APARECER OU NAO GRAFICOS AO EXERCUTAR CODIGO
+showing_figures = false; %setar esta variavel
+if showing_figures == true
+    set(0,'DefaultFigureVisible','on')
+else    set(0,'DefaultFigureVisible','off')
+end
+
 % PEGAR SUBDIRETORIOS
 global folder;
 folder = fileparts(which(mfilename)); 
