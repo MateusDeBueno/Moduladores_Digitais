@@ -2,8 +2,7 @@ clc
 clear ALL
 close ALL
 
-%oi
-
+% PEGAR SUBDIRETORIOS
 global folder
 addpath(genpath(folder))
 
