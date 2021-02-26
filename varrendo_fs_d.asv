@@ -37,105 +37,106 @@ D2 = D;
 D3 = D+.3;
 fs1 = fs;
 fs2 = 2*fs;
-fs3 = 4*fs;
+fs2 = 2*fs;
 
 % MODULADOR CRESCENTE (END-OF-ON-TIME)
 
-A_fs = end_time(D, fs1);
-A1_fs = end_time(D, fs2);
-A2_fs = end_time(D, fs3);
+A_fs = end_time(D, fs);
+A1_fs = end_time(D, fs*2);
+A2_fs = end_time(D, fs*4);
 figure
 bode(A_fs, A1_fs, A2_fs, vector_freq, opts);
-legend({['fs = ', num2str(fs1)],['fs = ', num2str(fs2)],['fs = ', num2str(fs3)]},'Location','southwest')
+legend({'fs = 5k','fs = 10k','fs = 20k'},'Location','southwest')
 title('End-of-on-time - Variando frequência de chaveamento (fs)')
 save_figure('End-of-on-time - Variando frequência de chaveamento (fs)', target_save)
 
-A_D = end_time(D1, fs);
-A1_D = end_time(D2, fs);
-A2_D = end_time(D3, fs);
+A_D = end_time(D-.3, fs);
+A1_D = end_time(D, fs);
+A2_D = end_time(D+.3, fs);
 figure 
 bode(A_D, A1_D, A2_D, vector_freq, opts);
-legend({['D = ' num2str(D1)],['D = ', num2str(D2)],['D = ', num2str(D3)]},'Location','southwest')
+legend({'D = 0.2','D = 0.4','D = 0.6'},'Location','southwest')
 title('End-of-on-time - Variando razão cíclica (D)')
 save_figure('End-of-on-time - Variando razão cíclica (D)', target_save)
 
 % MODULADOR DECRESCENTE (BEGIN-OF-ON-TIME)
 
-B_fs = begin_time(D, fs1);
-B1_fs = begin_time(D, fs2);
-B2_fs = begin_time(D, fs3);
+B_fs = begin_time(D, fs);
+B1_fs = begin_time(D, fs*2);
+B2_fs = begin_time(D, fs*4);
 figure
 bode(B_fs, B1_fs, B2_fs, vector_freq, opts);
-legend({['fs = ', num2str(fs1)],['fs = ', num2str(fs2)],['fs = ', num2str(fs3)]},'Location','southwest')
+legend({'fs = 5k','fs = 10k','fs = 20k'},'Location','southwest')
 title('Begin-of-on-time - Variando frequência de chaveamento (fs)')
 save_figure('Begin-of-on-time - Variando frequência de chaveamento (fs)', target_save)
 
-B_D = begin_time(D1, fs);
-B1_D = begin_time(D2, fs);
-B2_D = begin_time(D3, fs);
+B_D = begin_time(0.2, fs);
+B1_D = begin_time(0.4, fs);
+B2_D = begin_time(0.6, fs);
 figure 
 bode(B_D, B1_D, B2_D, vector_freq, opts);
-legend({['D = ' num2str(D1)],['D = ', num2str(D2)],['D = ', num2str(D3)]},'Location','southwest')
+legend({'D = 0.2','D = 0.4','D = 0.6'},'Location','southwest')
 title('Begin-of-on-time - Variando razão cíclica (D)')
 save_figure('Begin-of-on-time - Variando razão cíclica (D)', target_save)
 
 
 % MODULADOR TRIANGULAR PICO (SYMMETRIC-ON-TIME)
 
-C_fs = sym_on(D, fs1);
-C1_fs = sym_on(D, fs2);
-C2_fs = sym_on(D, fs3);
+C_fs = sym_on(D, fs);
+C1_fs = sym_on(D, fs*2);
+C2_fs = sym_on(D, fs*4);
 figure
 bode(C_fs, C1_fs, C2_fs, vector_freq, opts);
-legend({['fs = ', num2str(fs1)],['fs = ', num2str(fs2)],['fs = ', num2str(fs3)]},'Location','southwest')
+legend({'fs = 5k','fs = 10k','fs = 20k'},'Location','southwest')
 title('Symmetric-on-time - Variando frequência de chaveamento (fs)')
 save_figure('Symmetric-on-time - Variando frequência de chaveamento (fs)', target_save)
 
-C_D = sym_on(D1, fs);
-C1_D = sym_on(D2, fs);
-C2_D = sym_on(D3, fs);
+C_D = sym_on(0.2, fs);
+C1_D = sym_on(0.4, fs);
+C2_D = sym_on(0.6, fs);
+C3_D = sym_on(0.8, fs);
 figure 
 bode(C_D, C1_D, C2_D, vector_freq, opts);
-legend({['D = ' num2str(D1)],['D = ', num2str(D2)],['D = ', num2str(D3)]},'Location','southwest')
+legend({'D = 0.2','D = 0.4','D = 0.6'},'Location','southwest')
 title('Symmetric-on-time - Variando razão cíclica (D)')
 save_figure('Symmetric-on-time - Variando razão cíclica (D)', target_save)
 
 % MODULADOR TRIANGULAR VALE (SYMMETRIC-OFF-TIME)
 
-D_fs = sym_off(D, fs1);
-D1_fs = sym_off(D, fs2);
-D2_fs = sym_off(D, fs3);
+D_fs = sym_off(D, fs);
+D1_fs = sym_off(D, fs*2);
+D2_fs = sym_off(D, fs*4);
 figure
 bode(D_fs, D1_fs, D2_fs, vector_freq, opts);
-legend({['fs = ', num2str(fs1)],['fs = ', num2str(fs2)],['fs = ', num2str(fs3)]},'Location','southwest')
+legend({'fs = 5k','fs = 10k','fs = 20k'},'Location','southwest')
 title('Symmetric-off-time - Variando frequência de chaveamento (fs)')
 save_figure('Symmetric-off-time - Variando frequência de chaveamento (fs)', target_save)
 
-D_D = sym_off(D1, fs);
-D1_D = sym_off(D2, fs);
-D2_D = sym_off(D3, fs);
+D_D = sym_off(0.2, fs);
+D1_D = sym_off(0.4, fs);
+D2_D = sym_off(0.6, fs);
 figure 
 bode(D_D, D1_D, D2_D, vector_freq, opts);
-legend({['D = ' num2str(D1)],['D = ', num2str(D2)],['D = ', num2str(D3)]},'Location','southwest')
+legend({'D = 0.2','D = 0.4','D = 0.6'},'Location','southwest')
 title('Symmetric-off-time - Variando razão cíclica (D)')
 save_figure('Symmetric-off-time - Variando razão cíclica (D)', target_save)
 
 % MODULADOR TRIANGULAR VALE E PICO (DOUBLE-UPDATE)
 
-E_fs = double_up(D, fs1);
-E1_fs = double_up(D, fs2);
-E2_fs = double_up(D, fs3);
+E_fs = double_up(D, fs);
+E1_fs = double_up(D, fs*2);
+E2_fs = double_up(D, fs*4);
 figure
 bode(E_fs, E1_fs, E2_fs, vector_freq, opts);
-legend({['fs = ', num2str(fs1)],['fs = ', num2str(fs2)],['fs = ', num2str(fs3)]},'Location','southwest')
+legend({'fs = 5k','fs = 10k','fs = 20k'},'Location','southwest')
 title('Double-update - Variando frequência de chaveamento (fs)')
 save_figure('Double-update - Variando frequência de chaveamento (fs)', target_save)
 
-E_D = double_up(D1, fs);
-E1_D = double_up(D2, fs);
-E2_D = double_up(D3, fs);
+E_D = double_up(0.2, fs);
+E1_D = double_up(0.4, fs);
+E2_D = double_up(0.6, fs);
 figure 
 bode(E_D, E1_D, E2_D, vector_freq, opts);
-legend({['D = ' num2str(D1)],['D = ', num2str(D2)],['D = ', num2str(D3)]},'Location','southwest')
+legend({'D = 0.2','D = 0.4','D = 0.6'},'Location','southwest')
 title('Double-update - Variando razão cíclica (D)')
 save_figure('Double-update - Variando razão cíclica (D)', target_save)
