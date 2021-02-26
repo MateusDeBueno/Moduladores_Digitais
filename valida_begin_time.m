@@ -67,6 +67,7 @@ hold on
 semilogx(wout2,phase2)
 semilogx(freq,phase_zoh)
 semilogx(freq,phase_zoh_quanti)
+ylim([-360, 0])
 hold off
 legend({'Modelo begin time','Modelo begin time + atraso padé','Simulação (ZOH)','Simulação (ZOH+quantizador)'},'Location','southwest')
 sgtitle('Begin-of-on-time - Modelo vs Simulação no PSIM')

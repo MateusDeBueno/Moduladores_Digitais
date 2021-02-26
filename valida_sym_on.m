@@ -66,6 +66,7 @@ hold on
 semilogx(wout2,phase2)
 semilogx(freq,phase_zoh)
 semilogx(freq,phase_zoh_quanti)
+ylim([-360, 0])
 hold off
 legend({'Modelo symm on','Modelo symm on + atraso padé','Simulação (ZOH)','Simulação (ZOH+quantizador)'},'Location','southwest')
 sgtitle('Symmetric-on-time - Modelo vs Simulação no PSIM')

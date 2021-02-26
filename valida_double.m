@@ -67,6 +67,7 @@ hold on
 semilogx(wout2,phase2)
 semilogx(freq,phase_zoh)
 semilogx(freq,phase_zoh_quanti)
+ylim([-360, 0])
 hold off
 legend({'Modelo double update','Modelo double update + atraso padé','Simulação (ZOH)','Simulação (ZOH+quantizador)'},'Location','southwest')
 sgtitle('Double update - Modelo vs Simulação no PSIM')
