@@ -78,6 +78,5 @@ ylim([-360, 0])
 xline(2488.5,'-',{'Limite','do modelo'},'LabelVerticalAlignment','bottom')
 hold off
 legend({'Modelo symm on','Modelo symm on + atraso padé','Simulação (ZOH)','Simulação (ZOH+quantizador)'},'Location','southwest')
-%legend({'Modelo symm on','Simulação (ZOH)','Simulação (ZOH+quantizador)'},'Location','southwest')
 %sgtitle('Symmetric-on-time - Modelo vs Simulação no PSIM')
 save_figure('Sym_on', target_save)

@@ -15,8 +15,6 @@ name = 'trian_vale_100_zoh(tudo_5k).txt';
 [freq_zoh, amp_zoh, phase_zoh] = get_txt_bode(name);
 name = 'trian_vale_100_zoh_quanti(tudo_5k).txt';
 [freq_zoh_quanti, amp_zoh_quanti, phase_zoh_quanti] = get_txt_bode(name);
-
-
 freq = freq_zoh;
 vector_freq = freq;
 

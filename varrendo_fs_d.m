@@ -21,7 +21,6 @@ target_save = strcat('figures\',mfilename);
 % CONFIGURAÇÕES DO BODE
 opts = bodeoptions;
 opts.FreqUnits = 'Hz';                  % set to 'Hz' unit
-%opts.Xlim = [50,50000];                 % x-axis limits
 opts.YLim = {[-20,10];[-360,0]};       % y-axis limits
 opts.YLimMode = {'auto';'manual'};     % only x-axis is manually limited
 freq_step = 1;
@@ -47,7 +46,6 @@ fs2 = 2*fs;
 fs3 = 4*fs;
 
 % MODULADOR CRESCENTE (END-OF-ON-TIME)
-
 A_fs = end_time(D, fs1);
 A1_fs = end_time(D, fs2);
 A2_fs = end_time(D, fs3);
@@ -67,7 +65,6 @@ title('End-of-on-time - Variando razão cíclica (D)')
 save_figure('End-of-on-time - Variando razão cíclica (D)', target_save)
 
 % MODULADOR DECRESCENTE (BEGIN-OF-ON-TIME)
-
 B_fs = begin_time(D, fs1);
 B1_fs = begin_time(D, fs2);
 B2_fs = begin_time(D, fs3);
@@ -87,8 +84,7 @@ title('Begin-of-on-time - Variando razão cíclica (D)')
 save_figure('Begin-of-on-time - Variando razão cíclica (D)', target_save)
 
 
-% MODULADOR TRIANGULAR PICO (SYMMETRIC-ON-TIME)
-
+% MODULADOR TRIANGULAR VALE (SYMMETRIC-ON-TIME)
 C_fs = sym_on(D, fs1);
 C1_fs = sym_on(D, fs2);
 C2_fs = sym_on(D, fs3);
@@ -107,8 +103,7 @@ legend({['D = ' num2str(D1)],['D = ', num2str(D2)],['D = ', num2str(D3)]},'Locat
 title('Symmetric-on-time - Variando razão cíclica (D)')
 save_figure('Symmetric-on-time - Variando razão cíclica (D)', target_save)
 
-% MODULADOR TRIANGULAR VALE (SYMMETRIC-OFF-TIME)
-
+% MODULADOR TRIANGULAR PICO (SYMMETRIC-OFF-TIME)
 D_fs = sym_off(D, fs1);
 D1_fs = sym_off(D, fs2);
 D2_fs = sym_off(D, fs3);
@@ -128,7 +123,6 @@ title('Symmetric-off-time - Variando razão cíclica (D)')
 save_figure('Symmetric-off-time - Variando razão cíclica (D)', target_save)
 
 % MODULADOR TRIANGULAR VALE E PICO (DOUBLE-UPDATE)
-
 E_fs = double_up(D, fs1);
 E1_fs = double_up(D, fs2);
 E2_fs = double_up(D, fs3);

@@ -16,12 +16,8 @@ name = 'double_100_zoh(tudo_10k).txt';
 name = 'double_100_zoh_quanti(tudo_10k).txt';
 [freq_zoh_quanti, amp_zoh_quanti, phase_zoh_quanti] = get_txt_bode(name);
 
-
-
-
 freq = freq_zoh; %vetor de frequencia para todos os plots
 vector_freq = freq_zoh;
-
 
 % RECORTAR TODOS OS DADOS PARA IR SO ATE 5K
 freq = freq(1:67);
@@ -85,4 +81,3 @@ hold off
 legend({'Modelo double update','Modelo double update + atraso padé','Simulação (ZOH)','Simulação (ZOH+quantizador)'},'Location','southwest')
 %sgtitle('Double update - Modelo vs Simulação no PSIM')
 save_figure('Double update', target_save)
-
