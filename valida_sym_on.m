@@ -17,9 +17,16 @@ name = 'trian_pico_100_zoh_quanti(tudo_5k).txt';
 [freq_zoh_quanti, amp_zoh_quanti, phase_zoh_quanti] = get_txt_bode(name);
 
 freq = freq_zoh;
+vector_freq = freq;
+
+% RECORTAR TODOS OS DADOS PARA IR SO ATE 5K
+freq = freq(1:67);
+amp_zoh = amp_zoh(1:67);
+phase_zoh = phase_zoh(1:67);
+phase_zoh_quanti = phase_zoh_quanti(1:67);
+amp_zoh_quanti = amp_zoh_quanti(1:67);
 freq_min = freq(1);
 freq_max = freq(end);
-vector_freq = freq;
 
 % CONFIGURANDO BODE
 opts4 = bodeoptions;
@@ -49,6 +56,7 @@ subplot(2,1,1);
 semilogx(wout,mag)
 ylabel('Magnitude (dB)')
 xlabel('Frequency')
+xline(2488.5,'-')
 xlim([freq_min freq_max])
 grid
 hold on
@@ -67,7 +75,9 @@ semilogx(wout2,phase2)
 semilogx(freq,phase_zoh)
 semilogx(freq,phase_zoh_quanti)
 ylim([-360, 0])
+xline(2488.5,'-',{'Limite','do modelo'},'LabelVerticalAlignment','bottom')
 hold off
 legend({'Modelo symm on','Modelo symm on + atraso padé','Simulação (ZOH)','Simulação (ZOH+quantizador)'},'Location','southwest')
-sgtitle('Symmetric-on-time - Modelo vs Simulação no PSIM')
+%legend({'Modelo symm on','Simulação (ZOH)','Simulação (ZOH+quantizador)'},'Location','southwest')
+%sgtitle('Symmetric-on-time - Modelo vs Simulação no PSIM')
 save_figure('Sym_on', target_save)

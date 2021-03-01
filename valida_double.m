@@ -16,10 +16,21 @@ name = 'double_100_zoh(tudo_10k).txt';
 name = 'double_100_zoh_quanti(tudo_10k).txt';
 [freq_zoh_quanti, amp_zoh_quanti, phase_zoh_quanti] = get_txt_bode(name);
 
+
+
+
 freq = freq_zoh; %vetor de frequencia para todos os plots
+vector_freq = freq_zoh;
+
+
+% RECORTAR TODOS OS DADOS PARA IR SO ATE 5K
+freq = freq(1:67);
+amp_zoh = amp_zoh(1:67);
+phase_zoh = phase_zoh(1:67);
+phase_zoh_quanti = phase_zoh_quanti(1:67);
+amp_zoh_quanti = amp_zoh_quanti(1:67);
 freq_min = freq(1);
 freq_max = freq(end);
-vector_freq = freq_zoh;
 
 % CONFIGURANDO BODE
 opts4 = bodeoptions;
@@ -56,6 +67,7 @@ hold on
 semilogx(wout2,mag2)
 semilogx(freq,amp_zoh)
 semilogx(freq,amp_zoh_quanti)
+xline(2488.5,'-')
 hold off
 subplot(2,1,2); 
 semilogx(wout,phase)
@@ -68,8 +80,9 @@ semilogx(wout2,phase2)
 semilogx(freq,phase_zoh)
 semilogx(freq,phase_zoh_quanti)
 ylim([-360, 0])
+xline(2488.5,'-',{'Limite','do modelo'},'LabelVerticalAlignment','bottom')
 hold off
 legend({'Modelo double update','Modelo double update + atraso padé','Simulação (ZOH)','Simulação (ZOH+quantizador)'},'Location','southwest')
-sgtitle('Double update - Modelo vs Simulação no PSIM')
+%sgtitle('Double update - Modelo vs Simulação no PSIM')
 save_figure('Double update', target_save)
 

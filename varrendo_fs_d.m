@@ -3,7 +3,7 @@ clear ALL
 close ALL
 
 % CONFIGURAR PARA APARECER OU NAO GRAFICOS AO EXERCUTAR CODIGO
-showing_figures = false; %setar esta variavel
+showing_figures = true; %setar esta variavel
 if showing_figures == true
     set(0,'DefaultFigureVisible','on')
 else
@@ -102,7 +102,7 @@ C_D = sym_on(D1, fs);
 C1_D = sym_on(D2, fs);
 C2_D = sym_on(D3, fs);
 figure 
-bode(C_D, C1_D, C2_D, vector_freq, opts);
+bode(C_D, C1_D, 'r--', C2_D, 'y-.', vector_freq, opts);
 legend({['D = ' num2str(D1)],['D = ', num2str(D2)],['D = ', num2str(D3)]},'Location','southwest')
 title('Symmetric-on-time - Variando razão cíclica (D)')
 save_figure('Symmetric-on-time - Variando razão cíclica (D)', target_save)
@@ -122,7 +122,7 @@ D_D = sym_off(D1, fs);
 D1_D = sym_off(D2, fs);
 D2_D = sym_off(D3, fs);
 figure 
-bode(D_D, D1_D, D2_D, vector_freq, opts);
+bode(D_D, D1_D,'r--', D2_D, 'y-.', vector_freq, opts);
 legend({['D = ' num2str(D1)],['D = ', num2str(D2)],['D = ', num2str(D3)]},'Location','southwest')
 title('Symmetric-off-time - Variando razão cíclica (D)')
 save_figure('Symmetric-off-time - Variando razão cíclica (D)', target_save)
@@ -142,7 +142,7 @@ E_D = double_up(D1, fs);
 E1_D = double_up(D2, fs);
 E2_D = double_up(D3, fs);
 figure 
-bode(E_D, E1_D, E2_D, vector_freq, opts);
+bode(E_D, E1_D,'r--', E2_D, 'y-.', vector_freq, opts);
 legend({['D = ' num2str(D1)],['D = ', num2str(D2)],['D = ', num2str(D3)]},'Location','southwest')
 title('Double-update - Variando razão cíclica (D)')
 save_figure('Double-update - Variando razão cíclica (D)', target_save)

@@ -16,10 +16,19 @@ name = 'end_on_100_zoh(tudo_5k).txt';
 name = 'end_on_100_zoh_quanti(tudo_5k).txt';
 [freq_zoh_quanti, amp_zoh_quanti, phase_zoh_quanti] = get_txt_bode(name);
 
+
 freq = freq_zoh;
+vector_freq = freq;
+
+
+% RECORTAR TODOS OS DADOS PARA IR SO ATE 5K
+freq = freq(1:67);
+amp_zoh = amp_zoh(1:67);
+phase_zoh = phase_zoh(1:67);
+phase_zoh_quanti = phase_zoh_quanti(1:67);
+amp_zoh_quanti = amp_zoh_quanti(1:67);
 freq_min = freq(1);
 freq_max = freq(end);
-vector_freq = freq;
 
 % CONFIGURANDO BODE
 opts4 = bodeoptions;
@@ -56,6 +65,7 @@ hold on
 semilogx(wout2,mag2)
 semilogx(freq,amp_zoh)
 semilogx(freq,amp_zoh_quanti)
+xline(2488.5)
 hold off
 subplot(2,1,2); 
 semilogx(wout,phase)
@@ -67,8 +77,9 @@ hold on
 semilogx(wout2,phase2)
 semilogx(freq,phase_zoh)
 semilogx(freq,phase_zoh_quanti)
+xline(2488.5,'-',{'Limite','do modelo'},'LabelVerticalAlignment','bottom')
 ylim([-360, 0])
 hold off
 legend({'Modelo end time','Modelo end time + atraso padé','Simulação (ZOH)','Simulação (ZOH+quantizador)'},'Location','southwest')
-sgtitle('End-of-on-time - Modelo vs Simulação no PSIM')
+%sgtitle('End-of-on-time - Modelo vs Simulação no PSIM')
 save_figure('End_time', target_save)
